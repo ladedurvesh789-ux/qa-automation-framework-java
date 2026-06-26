@@ -19,8 +19,8 @@ public class LoginTest extends BaseTest {
         login.login(
                 ConfigReader.getProperty("username"),
                 ConfigReader.getProperty("password"));
-        String expectedUrl = "https://google.com";
-        //String expectedUrl = "https://practicetestautomation.com/logged-in-successfully/";
+       
+        String expectedUrl = "https://practicetestautomation.com/logged-in-successfully/";
         String actualUrl = driver.getCurrentUrl();
 
         Assert.assertEquals(actualUrl, expectedUrl, "Login Failed!");
