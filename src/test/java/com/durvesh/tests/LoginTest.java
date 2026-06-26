@@ -2,11 +2,13 @@ package com.durvesh.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+import org.testng.annotations.Listeners;
+import com.durvesh.listeners.ExtentListener;
 import com.durvesh.base.BaseTest;
 import com.durvesh.pages.LoginPage;
 import com.durvesh.utils.ConfigReader;
 
+@Listeners(ExtentListener.class)
 public class LoginTest extends BaseTest {
 
     @Test
