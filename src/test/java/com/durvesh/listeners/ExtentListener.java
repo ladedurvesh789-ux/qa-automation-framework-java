@@ -3,7 +3,9 @@ package com.durvesh.listeners;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-
+import org.openqa.selenium.WebDriver;
+import com.durvesh.utils.ScreenshotUtils;
+import java.lang.reflect.Field;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.durvesh.reports.ExtentManager;
@@ -46,6 +48,30 @@ public class ExtentListener implements ITestListener {
 
         ExtentTestManager.getTest().fail(result.getThrowable());
 
+        try {
+
+            Object testClass = result.getInstance();
+
+            Field field = testClass.getClass()
+                    .getSuperclass()
+                    .getDeclaredField("driver");
+
+            field.setAccessible(true);
+
+            WebDriver driver = (WebDriver) field.get(testClass);
+            
+            System.out.println("Driver = " + driver);
+
+            String screenshotPath =
+                    ScreenshotUtils.captureScreenshot(driver,
+                            result.getMethod().getMethodName());
+
+            ExtentTestManager.getTest()
+                    .addScreenCaptureFromPath(screenshotPath);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
