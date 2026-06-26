@@ -11,7 +11,7 @@ import com.durvesh.utils.ConfigReader;
 @Listeners(ExtentListener.class)
 public class LoginTest extends BaseTest {
 
-    @Test
+	@Test
     public void verifyLogin() {
 
         LoginPage login = new LoginPage(driver);
@@ -19,8 +19,8 @@ public class LoginTest extends BaseTest {
         login.login(
                 ConfigReader.getProperty("username"),
                 ConfigReader.getProperty("password"));
-       
-        String expectedUrl = "https://practicetestautomation.com/logged-in-successfully/";
+        String expectedUrl = "https://google.com";
+      //  String expectedUrl = "https://practicetestautomation.com/logged-in-successfully/";
         String actualUrl = driver.getCurrentUrl();
 
         Assert.assertEquals(actualUrl, expectedUrl, "Login Failed!");

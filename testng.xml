@@ -2,12 +2,14 @@
 
 <suite name="QA Automation Suite">
 
+    <listeners>
+        <listener class-name="com.durvesh.listeners.RetryTransformer"/>
+    </listeners>
+
     <test name="Login Tests">
 
         <classes>
-
             <class name="com.durvesh.tests.LoginTest"/>
-
         </classes>
 
     </test>
