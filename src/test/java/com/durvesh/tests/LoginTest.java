@@ -1,32 +1,41 @@
 package com.durvesh.tests;
 
 import org.testng.Assert;
-import org.testng.annotations.Test;
 import org.testng.annotations.Listeners;
-import com.durvesh.listeners.ExtentListener;
+import org.testng.annotations.Test;
+
 import com.durvesh.base.BaseTest;
+import com.durvesh.dataprovider.TestDataProvider;
+import com.durvesh.listeners.ExtentListener;
 import com.durvesh.pages.LoginPage;
-import com.durvesh.utils.ConfigReader;
 
 @Listeners(ExtentListener.class)
 public class LoginTest extends BaseTest {
 
-	@Test
-    public void verifyLogin() {
+    @Test(dataProvider = "loginData",
+          dataProviderClass = TestDataProvider.class)
+    public void verifyLogin(String username,
+                            String password,
+                            String expectedResult) {
 
         LoginPage login = new LoginPage(driver);
 
-        login.login(
-                ConfigReader.getProperty("username"),
-                ConfigReader.getProperty("password"));
-        String expectedUrl = "https://google.com";
-      //  String expectedUrl = "https://practicetestautomation.com/logged-in-successfully/";
+        login.login(username, password);
+
         String actualUrl = driver.getCurrentUrl();
 
-        Assert.assertEquals(actualUrl, expectedUrl, "Login Failed!");
+        boolean loginSuccess =
+                actualUrl.contains("logged-in-successfully");
 
-        System.out.println("Login Successful");
+        if (expectedResult.equalsIgnoreCase("PASS")) {
 
+            Assert.assertTrue(loginSuccess,
+                    "Expected Login to PASS");
+
+        } else {
+
+            Assert.assertFalse(loginSuccess,
+                    "Expected Login to FAIL");
+        }
     }
-
 }
