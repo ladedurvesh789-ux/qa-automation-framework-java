@@ -1,0 +1,28 @@
+# Maven
+target/
+
+# TestNG
+test-output/
+
+# Eclipse
+.settings/
+.project
+.classpath
+
+# IntelliJ
+.idea/
+*.iml
+
+# Logs
+logs/
+*.log
+
+# Screenshots generated during execution
+screenshots/*.png
+
+# Reports generated during execution
+reports/*.html
+
+# OS files
+.DS_Store
+Thumbs.db
