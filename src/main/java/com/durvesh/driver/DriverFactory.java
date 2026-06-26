@@ -20,10 +20,9 @@ public class DriverFactory {
 
     private static WebDriver driver;
 
-    public static WebDriver initializeDriver() {
+    public static WebDriver initializeDriver(String browser) {
 
-        String browser = ConfigReader.getProperty("browser");
-
+        
         logger.info("Initializing Browser : {}", browser);
 
         switch (browser.toLowerCase()) {

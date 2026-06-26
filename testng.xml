@@ -6,6 +6,9 @@
         <listener class-name="com.durvesh.listeners.RetryTransformer"/>
     </listeners>
 
+    <!-- Browser Parameter -->
+    <parameter name="browser" value="chrome"/>
+
     <test name="Login Tests">
 
         <classes>

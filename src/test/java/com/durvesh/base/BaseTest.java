@@ -1,37 +1,29 @@
 package com.durvesh.base;
 
 import org.openqa.selenium.WebDriver;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 
 import com.durvesh.driver.DriverFactory;
 
 public class BaseTest {
-	
+
     protected WebDriver driver;
-    protected Logger logger = LogManager.getLogger(getClass());
-    
+
+    @Parameters("browser")
     @BeforeMethod
-    public void setUp() {
+    public void setUp(String browser) {
 
-        logger.info("========== Test Started ==========");
-
-        driver = DriverFactory.initializeDriver();
-
-        logger.info("Browser launched successfully");
+        driver = DriverFactory.initializeDriver(browser);
 
     }
 
     @AfterMethod
     public void tearDown() {
 
-        logger.info("Closing browser");
-
         DriverFactory.quitDriver();
 
-        logger.info("========== Test Finished ==========");
-
     }
+
 }
